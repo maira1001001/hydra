@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "92ce7c91-5ca5-45f2-be15-14f5d517786b",
+		"name": "Hydra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create token with HTTP Body Authorization",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "some-consumer",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "some-secret",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9000/oauth2/token",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "HTTP Body (client_secret_post) - the OAuth 2.0 Client ID and secret are sent in the POST body (Content-Type: application/x-www-form-urlencoded)\n\nYou must set on database at `hydra_client`table with the following value:\n```\n\"token_endpoint_auth_method\":\"client_secret_post\"\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Create token with HTTP Basic Authorization",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic c29tZS1jb25zdW1lcjpzb21lLXNlY3JldA==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}:9000/oauth2/token",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"port": "9000",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "HTTP Basic Authorization (client_secret_basic) - the OAuth 2.0 Client ID and secret are sent in the HTTP Header (Authorization: basic ....)\n\nYou must set at database on `hydra_client`table, with the following value:\n\n```\n\"token_endpoint_auth_method\": \"client_secret_basic\"\n```\n\nPer default, the OAuth 2.0 Client allows HTTP Basic Authorization only"
+			},
+			"response": []
+		},
+		{
+			"name": "Token introspection",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "LSFJDvwxiqaVjqF0gqZf3vR1_m8db41OI-EbnQCdVDU.qub-gkOSTUFwEHxSvFTNYEXzra_EElpIJIgopWQBwfE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:9001/oauth2/introspect",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"oauth2",
+						"introspect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics Prometheus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/metrics/prometheus",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"metrics",
+						"prometheus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/health/alive",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"health",
+						"alive"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
