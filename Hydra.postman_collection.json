@@ -63,7 +63,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Basic c29tZS1jb25zdW1lcjpzb21lLXNlY3JldA==",
+						"value": "Basic base64EncryptedPassword",
 						"type": "text"
 					}
 				],
